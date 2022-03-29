@@ -26,13 +26,13 @@ router.post('/register', (req, res, next) => {
 
 // Login
 router.post('/login', (req, res, next) => {
-  const nom = req.body.nom;
+  const email = req.body.email;
   const password = req.body.password;
 
-  User.getUserByUsername(nom, (err, user) => {
+  User.getUserByEmail(email, (err, user) => {
     if(err) throw err;
     if(!user){
-      return res.json({success: false, msg: 'User not found'});
+      return res.json({success: false, msg: 'email not found'});
     } 
 
     User.comparePassword(password, user.password, (err, isMatch) => {
