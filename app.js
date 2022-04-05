@@ -37,6 +37,7 @@ app.use(cors());
 
 var indexRouter = require('./routes/index');
 var users = require('./routes/users');
+var contrat = require('./routes/contrat');
 //var activiteRouter = require('./routes/activite');
 //var leaveRequestRouter = require('./routes/leaveRequest');
 //var listLeaveRouter = require('./routes/listLeave');
@@ -57,6 +58,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', users);
+app.use('/contrat', contrat);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

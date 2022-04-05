@@ -65,9 +65,20 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 });
 
 //get all users
-router.get('/usersall', function(req, res){
-  console.log('Get request for all Users');
-  User.find();
+router.get('/usersall', function(req, res, next){
+  
+  User.find(function(err, userListResp){
+    if(err){
+      res.send({status: 500, message: 'Unable to Find users'});
+            }
+      else{
+
+        const recordCount = userListResp.length;
+      res.send({status: 200,recordCount:recordCount , results: userListResp});
+          }
+
+  });
+
 });
 
 module.exports = router;
