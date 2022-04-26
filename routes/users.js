@@ -24,6 +24,8 @@ router.post('/register', (req, res, next) => {
   });
 });
 
+
+
 // Login
 router.post('/login', (req, res, next) => {
   const email = req.body.email;

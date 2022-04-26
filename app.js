@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 
 var app = express();
+app.use(cors());
 
 // Passport Middleware
 app.use(passport.initialize());
@@ -32,8 +33,6 @@ mongoose.connect(config.database, function(err){
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-
-app.use(cors());
 
 var indexRouter = require('./routes/index');
 var users = require('./routes/users');
