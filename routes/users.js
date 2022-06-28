@@ -4,7 +4,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 
-const User = require('../models/user.model');
+const UserModel = require('../models/user.model');
 
 // Register
 router.post('/register', (req, res, next) => {
@@ -15,7 +15,7 @@ router.post('/register', (req, res, next) => {
     password: req.body.password
   });
 
-  User.addUser(newUser, (err, user) => {
+  UserModel.addUser(newUser, (err, user) => {
     if(err){
       res.json({success: false, msg:'Failed to register user'});
     } else {
@@ -31,13 +31,13 @@ router.post('/login', (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
 
-  User.getUserByEmail(email, (err, user) => {
+  UserModel.getUserByEmail(email, (err, user) => {
     if(err) throw err;
     if(!user){
       return res.json({success: false, msg: "Email non trouvé"});
     } 
 
-    User.comparePassword(password, user.password, (err, isMatch) => {
+    UserModel.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch){
         const token = jwt.sign({data: user}, config.secret, {
@@ -69,7 +69,7 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
 //get all users
 router.get('/usersall', function(req, res, next){
   
-  User.find(function(err, userListResp){
+  UserModel.find(function(err, userListResp){
     if(err){
       res.send({status: 500, message: 'Unable to Find users'});
             }
@@ -82,5 +82,60 @@ router.get('/usersall', function(req, res, next){
   });
 
 });
+
+/* Update existing User . */
+router.put('/update/:id', function (req, res, next) {
+
+  const user = {
+
+    nom: req.body.nom,
+    prenom: req.body.prenom,
+    email: req.body.email,
+    telephone: req.body.telephone,
+    civilite: req.body.civilite,
+    pays_adresse: req.body.pays_adresse,
+    ville_adresse: req.body.ville_adresse,
+    rue_adresse: req.body.rue_adresse,
+    num_adresse: req.body.num_adresse,
+    postal_adresse: req.body.postal_adresse,
+    roleUtilisateur: req.body.roleUtilisateur,
+    idService: req.body.idService
+  };
+
+  UserModel.findByIdAndUpdate(req.params.id, { $set:user },{ new:true }, (err, data) => {
+    if (!err) {
+
+      res.send({ status: 200, message: 'user updated successfully', results: data })
+     
+    } else {
+
+      res.send({ status: 500, message: 'Unable to update the user' })
+
+    }
+
+  });
+});
+
+/* Delete existing User . */
+router.delete('/delete', function (req, res, next) {
+  const idUser = req.query.idUser;
+
+  UserModel.findByIdAndDelete(idUser, function (err, userResp) {
+
+    if (err) {
+      res.send({ status: 500, message: 'Unable to Delete the user' });
+    }
+    else {
+      res.send({ status: 200, message: 'user deleted successfully', results: userResp });
+    }
+
+  });
+});
+
+/* Search existing User . */
+router.get('/search', function (req, res, next) {
+  res.send('respond with a resource');
+});
+
 
 module.exports = router;
