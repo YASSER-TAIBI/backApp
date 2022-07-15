@@ -39,7 +39,7 @@ var users = require('./routes/users');
 var contrat = require('./routes/contrat');
 var activite = require('./routes/activite');
 var service = require('./routes/service');
-//var leaveRequestRouter = require('./routes/leaveRequest');
+var conge = require('./routes/conge');
 //var listLeaveRouter = require('./routes/listLeave');
 //var profileRouter = require('./routes/profile');
 //var updatePasswordRouter = require('./routes/updatePassword');
@@ -61,6 +61,7 @@ app.use('/users', users);
 app.use('/contrat', contrat);
 app.use('/activite', activite);
 app.use('/service', service);
+app.use('/conge', conge);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
