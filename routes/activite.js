@@ -38,6 +38,13 @@ MongoClient.connect(url, function (err, db) {
       });
   });
 
+  app.post("/GetAllData", (req, res) => {
+    dbo.collection('activiteData').find({}).toArray((err, cus) => {
+        res.send(cus);
+    });
+});
+
+
   app.post("/BatchData", (req, res) => {
       console.log(req.body);
       var eventData = [];

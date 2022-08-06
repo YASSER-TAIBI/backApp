@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
     rue_adresse: String,
     num_adresse: Number,
     postal_adresse: Number,
-    roleUtilisateur: String,
+    userRole: String,
     idService: String
     
 });

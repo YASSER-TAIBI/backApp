@@ -8,11 +8,12 @@ const UserModel = require('../models/user.model');
 
 // Register
 router.post('/register', (req, res, next) => {
-  let newUser = new User({
+  let newUser = new UserModel({
     nom: req.body.nom,
     email: req.body.email,
     prenom: req.body.prenom,
-    password: req.body.password
+    password: req.body.password,
+    userRole: req.body.userRole,
   });
 
   UserModel.addUser(newUser, (err, user) => {
@@ -52,6 +53,7 @@ router.post('/login', (req, res, next) => {
             nom: user.nom,
             prenom: user.prenom,
             email: user.email,
+            userRole: user.userRole
           }
         });
       } else {
@@ -98,7 +100,7 @@ router.put('/update/:id', function (req, res, next) {
     rue_adresse: req.body.rue_adresse,
     num_adresse: req.body.num_adresse,
     postal_adresse: req.body.postal_adresse,
-    roleUtilisateur: req.body.roleUtilisateur,
+    userRole: req.body.userRole,
     idService: req.body.idService
   };
 
