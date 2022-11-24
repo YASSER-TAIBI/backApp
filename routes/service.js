@@ -25,7 +25,7 @@ router.get('/list', function (req, res, next) {
 
 
 
-/* Create new Contrat . */
+/* Create new Service */
 router.post('/add', function (req, res, next) {
 
   let nomService = req.body.nomService;

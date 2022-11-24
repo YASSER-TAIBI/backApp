@@ -58,8 +58,7 @@ MongoClient.connect(url, function (err, db) {
             eventData[i].StartTime = eventData[i].StartTime;
             eventData[i].EndTime = eventData[i].EndTime;
             eventData[i].Location = eventData[i].Location;
-            var IdUser = eventData[i].IdUser ;
-            eventData[i].IdUser = IdUser;
+            eventData[i].IdUser = eventData[i].IdUser;
 
               // var sdate = new Date(eventData[i].StartTime);
               // console.log("sdate :"+sdate);

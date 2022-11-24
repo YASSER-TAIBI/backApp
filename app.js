@@ -40,9 +40,6 @@ var contrat = require('./routes/contrat');
 var activite = require('./routes/activite');
 var service = require('./routes/service');
 var conge = require('./routes/conge');
-//var listLeaveRouter = require('./routes/listLeave');
-//var profileRouter = require('./routes/profile');
-//var updatePasswordRouter = require('./routes/updatePassword');
 
 
 
